@@ -1,0 +1,14 @@
+error driven development -> used to understand the errors
+
+placeholder vs value 
+placeholder => still need to type everything in to pass to database
+
+def update #safe way to update product
+	@product = Product.find(params[:id])
+	@product.update_attribute(:name, params[:name])
+	@product.update_attribute(:description, params[:description])
+	@product.update_attribute(:pricing, params[:pricing])
+end
+
+category: Category.find(params[:id])
+category: Category.find(params[:category])

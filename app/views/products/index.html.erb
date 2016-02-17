@@ -1,0 +1,24 @@
+<h1>Listing Products</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>		
+    <th>Price</th>
+    <th>Category</th>
+  </tr>
+  <% @products.each do |x| %>
+  	<tr>
+	    <td><%= x.name %></td>
+	    <td><%= x.description %></td>		
+	    <td><%= x.pricing %></td>
+      <td><%= x.cat_name%></td> 
+      <td>
+        <a href='/products/<%= x.id %>'>Show</a>
+        <a href='/products/<%= x.id %>/edit'>Edit</a>
+        <a href= '/products/<%= x.id %>' data-method='delete'>Destroy</a>
+  	</tr>
+
+  <% end %>
+ </table>
+ <br>
+ <a href = '/products/new'>New Product</a>

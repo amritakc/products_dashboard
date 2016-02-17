@@ -1,0 +1,11 @@
+<h1>New product</h1>
+
+<%= simple_form_for :product do |f| %>
+<%= f.input :name %><br>
+<%= f.input :description %><br>
+<%= f.input :pricing %><br>
+<%= f.input :cat_name %><br>
+<%= f.button :submit %><br>
+<% end %>
+
+<a href='/products'>Back</a>
