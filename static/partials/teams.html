@@ -1,17 +1,22 @@
 <div ng-controller="teamsController">
  	<h1>Team</h1>
+ 	<form class='col-md-4'>
+		<div class='form-group'>
+			<label for='name'>Name:</label>
+			<input type='text' class='form-control' ng-model='newTeam.name'>
+		</div>
+		<button class='btn btn-info' ng-click='createTeam()'>Add New Team</button>
+	</form>
  	<table class='table'>
 		<thead>
 			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Language</th>
+				<th>Name</th>
+				<th>Action</th>
 			</tr>
 		</thead>
-			<tr ng-repeat='user in users track by $index'>
-				<td>{{ user.first_name }}</td>
-				<td>{{ user.last_name }}</td>
-				<td>{{ user.language }}</td>
+			<tr ng-repeat='team in teams track by $index'>
+				<td>{{ team.name }}</td>
+				<td><button class='btn btn-danger' ng-click='deleteTeam($index)'>Remove Team</button</td>
 			</tr>
 	</table>
 </div>

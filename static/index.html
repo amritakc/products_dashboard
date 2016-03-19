@@ -17,17 +17,105 @@
     			$routeProvider
     				.when('/', {
     					templateUrl: 'partials/players.html'
-    				});
+    				})
     				.when('/teams', {
     					templateUrl: 'partials/teams.html'
-    				});
+    				})
     				.when('/associations', {
     					templateUrl: 'partials/associations.html'
-    				});
+    				})
     				.otherwise({
     					redirectTo: '/'
     				});
     		});
+    		myApp.factory('playerFactory', function(){
+    			var players = [];
+    			var factory = [];
+    			factory.getPlayers = function(all_players){
+    				all_players(players);
+    			};
+    			factory.createPlayer = function(player){
+    				players.push(player);
+    			};
+    			factory.destroyPlayer = function(index){
+    				players.splice(index, 1);
+    			};
+    			return factory;
+    		});
+    		myApp.factory('teamFactory', function(){
+    			var teams = [];
+    			var assignments = [];
+    			var factory = [];
+    			factory.getTeams = function(all_teams){
+    				all_teams(teams);
+    			};
+    			factory.createTeam = function(team){
+    				teams.push(team);
+    			};
+    			factory.destroyTeam = function(index){
+    				teams.splice(index, 1);
+    			};
+    			factory.assignTeam = function(info){
+    				console.log('factory' + info);
+    				assignments.push(info);
+    			};
+    			factory.getAssignTeam = function(all_assignments){
+    				all_assignments(assignments);
+    			};
+    			factory.removeTeam = function(index){
+    				assignments.splice(index, 1);
+    			};
+    			return factory;
+    		})
+    		myApp.controller('playersController', function($scope, playerFactory){
+    			$scope.players = [];
+    			playerFactory.getPlayers(function(data){
+    				$scope.players = data;
+    			});
+    			$scope.createPlayer = function(){
+    				playerFactory.createPlayer($scope.newPlayer);
+    				$scope.newPlayer = {};
+    			};
+    			$scope.deletePlayer =  function($index){
+    				playerFactory.destroyPlayer($index);
+    			};
+    		});
+    		myApp.controller('teamsController', function($scope, teamFactory){
+    			$scope.teams = [];
+    			teamFactory.getTeams(function(data){
+    				$scope.teams = data;
+    			});
+    			$scope.createTeam = function(){
+    				teamFactory.createTeam($scope.newTeam);
+    				$scope.newTeam = {};
+    			};
+    			$scope.deleteTeam = function($index){
+    				teamFactory.destroyTeam($index);
+    			};
+    		});
+    		myApp.controller('associationsController', function($scope, teamFactory, playerFactory){
+    			$scope.teams = [];
+    			$scope.players = [];
+    			$scope.assignments = [];
+    			teamFactory.getTeams(function(data){
+    				$scope.teams = data;
+    			});
+    			playerFactory.getPlayers(function(data){
+    				$scope.players = data;
+    			});
+    			$scope.assignTeam = function(){
+    				console.log('controller' + $scope.makeTeam.player + $scope.makeTeam.team);
+    				teamFactory.assignTeam($scope.makeTeam);
+    				$scope.makeTeam = {};
+    			};
+    			teamFactory.getAssignTeam(function(data){
+    				$scope.assignments = data;
+    			});
+    			$scope.clearTeam = function($index){
+    				teamFactory.removeTeam($index);
+    			};
+
+    		})
     	</script>
     </head>
     <body ng-app = 'myApp'>
