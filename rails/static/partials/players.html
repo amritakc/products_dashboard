@@ -1,0 +1,22 @@
+<div ng-controller="playersController">
+ 	<h1>Players</h1>
+ 	<form class='col-md-4'>
+		<div class='form-group'>
+			<label for='name'>Name:</label>
+			<input type='text' class='form-control' ng-model='newPlayer.name'>
+		</div>
+		<button class='btn btn-info' ng-click='createPlayer()'>Add Player</button>
+	</form>
+ 	<table class='table'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+			<tr ng-repeat='player in players track by $index'>
+				<td>{{ player.name }}</td>
+				<td><button class='btn btn-danger' ng-click='deletePlayer($index)'>Remove Player</button</td>
+			</tr>
+	</table>
+</div>

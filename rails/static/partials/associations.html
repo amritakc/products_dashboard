@@ -1,0 +1,28 @@
+<div ng-controller="associationsController">
+ 	<h1>Associations</h1>
+ 	<form class='col-md-4'>
+	 	<h3> Players</h3>
+	 	<select ng-model='makeTeam.player'>
+			<option ng-repeat='player in players track by $index'>{{ player.name }}</option>
+		</select>
+		<h3>Teams</h3>
+		<select ng-model='makeTeam.team'>
+			<option ng-repeat='team in teams track by $index'>{{ team.name }}</option>
+		</select>
+		<button class='btn btn-info' ng-click='assignTeam()'>Assign Player to Team</button>
+	</form>
+ 	<table class='table'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Team</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+			<tr ng-repeat='assign in assignments track by $index'>
+				<td>{{ assign.player }}</td>
+				<td>{{ assign.team }}</td>
+				<td><button class='btn btn-info' ng-click='clearTeam($index)'>Clear Assignment</button></td>
+			</tr>
+	</table>
+</div>
